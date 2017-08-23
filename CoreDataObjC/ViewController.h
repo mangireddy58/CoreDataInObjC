@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UniversalDataModel.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController {
+    NSMutableArray *userNamesArray;
+}
+@property (weak, nonatomic) IBOutlet UITextField *userNameTxtFld;
+@property (weak, nonatomic) IBOutlet UITextField *userIdTxtFld;
+@property (weak, nonatomic) IBOutlet UITextField *deviceTokenTxtFld;
 
+- (IBAction)InsertBtnAction:(id)sender;
 
 @end
 
