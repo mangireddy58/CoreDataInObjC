@@ -24,7 +24,9 @@
 @property (copy, nonatomic) NSMutableArray *userNameArray;
 
 + (UniversalDataModel *)getUniversalDataModel;
+//+ (UniversalDataModel *)getSavedArrayDataModel;
 - (void) clearUserDataModel;
 - (void) saveData:(NSString *)userName andDeviceToken:(NSString *)devicertoken andUserId:(NSString *)userId;
 - (void)saveArrayOfData:(NSMutableArray *)userNameArray;
+
 @end

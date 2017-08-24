@@ -41,15 +41,40 @@ static UniversalDataModel *sUniversalDataModel = nil;
                 sUniversalDataModel.userName = [userDataManagedObject valueForKey:@"userName"];
                 sUniversalDataModel.userId = [userDataManagedObject valueForKey:@"userId"];
                 sUniversalDataModel.deviceToken = [userDataManagedObject valueForKey:@"deviceToken"];
+                sUniversalDataModel.userNameArray = [userDataManagedObject valueForKey:@"userNameArray"];
                 
                 NSLog(@"Name: %@", sUniversalDataModel.userName);
                 NSLog(@"UserId: %@", sUniversalDataModel.userId);
                 NSLog(@"Device Token: %@", sUniversalDataModel.deviceToken);
+                NSLog(@"UserNameArray: %@", sUniversalDataModel.userNameArray);
             }
         }
     }
     return sUniversalDataModel;
 }
+//+ (UniversalDataModel *)getSavedArrayDataModel {
+//    @synchronized (self) {
+//        if (sUniversalDataModel == nil) {
+//            sUniversalDataModel = [[UniversalDataModel alloc]init];
+//            
+//            NSManagedObjectContext *context = nil;
+//            id delegate = [[UIApplication sharedApplication] delegate];
+//            if ([delegate performSelector:@selector(managedObjectContext)]) {
+//                context = [delegate managedObjectContext];
+//            }
+//            NSFetchRequest *request = [[NSFetchRequest alloc] init];
+//            [request setEntity:[NSEntityDescription entityForName:USER_ENTITY_NAME inManagedObjectContext:context]];
+//            NSError *error = nil;
+//            NSMutableArray *results = [[context executeFetchRequest:request error:&error]mutableCopy];
+//            NSLog(@"result %@", results);
+//            if ([results count] >= 1) {
+//                NSManagedObject *userDataManagedObject = [results lastObject];
+//                sUniversalDataModel.userNameArray = [userDataManagedObject valueForKey:@"userNameArray"];
+//            }
+//        }
+//    }
+//    return sUniversalDataModel;
+//}
 - (NSManagedObjectContext *)managedObjectContext {
     NSManagedObjectContext *context = nil;
     id delegate = [[UIApplication sharedApplication] delegate];
@@ -91,9 +116,7 @@ static UniversalDataModel *sUniversalDataModel = nil;
 #pragma mark - Array of data saving
 - (void)saveArrayOfData:(NSMutableArray *)userNameArray {
 //    [self clearUserDataModel];
-    NSLog(@"Array %@", userNameArray);
     mUserNameArray = userNameArray;
-    
     NSManagedObjectContext *context = [self managedObjectContext];
     
     if (self.userDataModel) {
@@ -103,24 +126,23 @@ static UniversalDataModel *sUniversalDataModel = nil;
         for (int i = 0; i < userNameArray.count; i++){
             NSManagedObject *newData = [NSEntityDescription insertNewObjectForEntityForName:USER_ENTITY_NAME inManagedObjectContext:context];
             [newData setValue:mUserNameArray forKey:@"userNameArray"];
-//            [userNameArray addObject:newData];
         }
     }
-    
     NSError *error = nil;
     if (![context save:&error]) {
         NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
     }else {
+        NSLog(@"Saved array %@", userNameArray);
         NSLog(@"Data saved successfully ..");
     }
     
 }
+
 #pragma mark - Clearing the data
 - (void)clearUserDataModel{
     self.userName = @"";
     self.deviceToken = @"";
     self.userId = @"";
-//    self.userNameArray = nil;
     
     NSManagedObjectContext *context = [self managedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];

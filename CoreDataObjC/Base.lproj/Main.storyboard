@@ -59,6 +59,10 @@
                                     <action selector="InsertBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Qf-dI-Yfd"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pd1-EU-aVg">
+                                <rect key="frame" x="24" y="298" width="273" height="263"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -67,8 +71,12 @@
                             <constraint firstItem="aL5-MQ-XTD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="40" id="7JQ-EY-CV9"/>
                             <constraint firstAttribute="trailing" secondItem="aL5-MQ-XTD" secondAttribute="trailing" constant="39" id="HKd-nD-pSh"/>
                             <constraint firstItem="Yaq-oj-Uem" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="M1u-38-SsY"/>
+                            <constraint firstItem="Pd1-EU-aVg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="24" id="Mq3-k6-beq"/>
+                            <constraint firstItem="Pd1-EU-aVg" firstAttribute="top" secondItem="aL5-MQ-XTD" secondAttribute="bottom" constant="8.5" id="NGP-mA-nzO"/>
                             <constraint firstAttribute="trailing" secondItem="AMC-d1-HCl" secondAttribute="trailing" constant="39" id="Otp-xL-rum"/>
+                            <constraint firstAttribute="trailing" secondItem="Pd1-EU-aVg" secondAttribute="trailing" constant="23" id="gdB-SL-4FO"/>
                             <constraint firstItem="ND5-DV-H7R" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="45" id="ofv-bn-9k8"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Pd1-EU-aVg" secondAttribute="bottom" constant="7" id="pge-Ag-1M8"/>
                             <constraint firstAttribute="trailing" secondItem="ND5-DV-H7R" secondAttribute="trailing" constant="39" id="pxB-qD-13q"/>
                             <constraint firstItem="aL5-MQ-XTD" firstAttribute="top" secondItem="Yaq-oj-Uem" secondAttribute="bottom" constant="46" id="s1V-Za-VHk"/>
                             <constraint firstItem="Yaq-oj-Uem" firstAttribute="top" secondItem="AMC-d1-HCl" secondAttribute="bottom" constant="21" id="teD-5M-Obg"/>
@@ -81,6 +89,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="arrayTblView" destination="Pd1-EU-aVg" id="vSp-JG-cet"/>
                         <outlet property="deviceTokenTxtFld" destination="Yaq-oj-Uem" id="s7c-UV-Vth"/>
                         <outlet property="userIdTxtFld" destination="AMC-d1-HCl" id="ad2-5s-GGX"/>
                         <outlet property="userNameTxtFld" destination="ND5-DV-H7R" id="W1e-U1-vMR"/>
