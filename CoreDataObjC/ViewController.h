@@ -9,13 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "UniversalDataModel.h"
 
-@interface ViewController : UIViewController<UITableViewDataSource, UITableViewDelegate> {
-    NSMutableArray *userNamesArray;
-}
+@interface ViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextField *userNameTxtFld;
 @property (weak, nonatomic) IBOutlet UITextField *userIdTxtFld;
 @property (weak, nonatomic) IBOutlet UITextField *deviceTokenTxtFld;
 @property (weak, nonatomic) IBOutlet UITableView *arrayTblView;
+
+@property (strong, nonatomic) NSMutableArray *tempArray;
 
 - (IBAction)InsertBtnAction:(id)sender;
 

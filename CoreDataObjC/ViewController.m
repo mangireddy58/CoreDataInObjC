@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    userNamesArray = [[NSMutableArray alloc]init];
+    
     UniversalDataModel *objUniversalModel = [UniversalDataModel getUniversalDataModel];
     NSLog(@"Data of array %@",objUniversalModel.userNameArray);
     
@@ -43,18 +43,14 @@
     // Storing textfiled values into coredata
     UniversalDataModel *objUniversalDataModel = [UniversalDataModel getUniversalDataModel];
 //    [objUniversalDataModel saveData:self.userNameTxtFld.text andDeviceToken:self.deviceTokenTxtFld.text andUserId:self.userIdTxtFld.text];
+    self.tempArray = [[NSMutableArray alloc]init];
+    [self.tempArray addObjectsFromArray:objUniversalDataModel.userNameArray];
     
-    NSMutableArray *tempArray = [[NSMutableArray alloc]init];
+    [self.tempArray addObject:self.userNameTxtFld.text];
+    [self.tempArray addObject:self.userIdTxtFld.text];
+    [self.tempArray addObject:self.deviceTokenTxtFld.text];
     
-    [tempArray addObject:self.userNameTxtFld.text];
-    [tempArray addObject:self.userIdTxtFld.text];
-    [tempArray addObject:self.deviceTokenTxtFld.text];
-    
-    [userNamesArray addObjectsFromArray:tempArray];
-//    NSArray *finalArray = [NSArray arrayWithArray:tempArray];
-//    [[UniversalDataModel getUniversalDataModel].userNameArray addObjectsFromArray:finalArray];
-    
-    [objUniversalDataModel saveArrayOfData:userNamesArray];
+    [objUniversalDataModel saveArrayOfData:self.tempArray];
     
     // Tableview loading
     self.arrayTblView.dataSource = self;
@@ -64,6 +60,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [UniversalDataModel getUniversalDataModel].userNameArray.count;
 }
@@ -81,7 +78,10 @@
     NSLog(@"Data of array %@",objUniversalModel.userNameArray);// objUniversalModel.userNameArray
 }
 
-
+-(BOOL) textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
 
 
 
